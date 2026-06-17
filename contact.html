@@ -50,7 +50,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -133,7 +132,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="full" style="max-width:490px;margin:0 auto;">
-                                                                                                <div id="map" style="width:490px;height:700px;border:0;display:block;"></div>
+                                                                                                <iframe id="googleMaps" src="https://maps.google.com/maps?q=Cyber%20Ops%20Ltd%2032%20Lynwood%20Gardens%2C%20Croydon%2C%20London%20CR0%204QH&z=17&output=embed" width="490" height="700" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
@@ -390,28 +389,6 @@ jQuery(function ($) {
   var note = document.querySelector('#cert-note');
   if (note) note.textContent = 'You selected: ' + cert.replace(/[-_]/g,' ');
 })();
-</script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-    var lat = 51.36684, lng = -0.119902;
-    var map = L.map('map', { scrollWheelZoom: false }).setView([lat, lng], 17);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-        maxZoom: 19
-    }).addTo(map);
-    var marker = L.marker([lat, lng]).addTo(map);
-    marker.bindPopup('<b>Cyber Ops Ltd</b><br>32 Lynwood Gardens<br>Croydon<br>London<br>United Kingdom<br>CR0 4QH').openPopup();
-    // Add "Open in Maps" control that opens Google Maps at the same coordinates
-    var openUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat + ',' + lng);
-    var openControl = L.control({position: 'topright'});
-    openControl.onAdd = function () {
-        var container = L.DomUtil.create('div', 'leaflet-control-openmaps');
-        container.innerHTML = '<a href="' + openUrl + '" target="_blank" rel="noopener" style="display:inline-block;padding:6px 10px;background:#fff;border-radius:4px;color:#111;font-weight:700;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,0.12)">Open in Maps</a>';
-        return container;
-    };
-    openControl.addTo(map);
-});
 </script>
 </body>
 

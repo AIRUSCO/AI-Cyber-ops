@@ -396,11 +396,21 @@ jQuery(function ($) {
 document.addEventListener('DOMContentLoaded', function(){
     var lat = 51.36684, lng = -0.119902;
     var map = L.map('map', { scrollWheelZoom: false }).setView([lat, lng], 17);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        maxZoom: 19
     }).addTo(map);
     var marker = L.marker([lat, lng]).addTo(map);
     marker.bindPopup('<b>Cyber Ops Ltd</b><br>32 Lynwood Gardens<br>Croydon<br>London<br>United Kingdom<br>CR0 4QH').openPopup();
+    // Add "Open in Maps" control that opens Google Maps at the same coordinates
+    var openUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat + ',' + lng);
+    var openControl = L.control({position: 'topright'});
+    openControl.onAdd = function () {
+        var container = L.DomUtil.create('div', 'leaflet-control-openmaps');
+        container.innerHTML = '<a href="' + openUrl + '" target="_blank" rel="noopener" style="display:inline-block;padding:6px 10px;background:#fff;border-radius:4px;color:#111;font-weight:700;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,0.12)">Open in Maps</a>';
+        return container;
+    };
+    openControl.addTo(map);
 });
 </script>
 </body>
